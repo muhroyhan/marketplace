@@ -3,7 +3,7 @@ import React from 'react'
 
 const Page = async ({ params }: { params: Promise<{ slugs: string[] }> }) => {
   const { slugs } = await params
-  console.log(slugs)
+
   return <ProductPaginatedComponent slugs={slugs} />
 }
 
