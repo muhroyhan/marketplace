@@ -11,28 +11,28 @@ const getHeaders = () => {
   }
 }
 
-export const get = <T>(url: string, params?: object) =>
+export const apiGet = <T>(url: string, params?: object) =>
   axiosInstance.get<T>(url, {
     headers: getHeaders(),
     params,
   })
 
-export const post = <T>(url: string, data?: object) =>
+export const apiPost = <T>(url: string, data?: object) =>
   axiosInstance.post<T>(url, data, {
     headers: getHeaders(),
   })
 
-export const put = <T>(url: string, data?: object) =>
+export const apiPut = <T>(url: string, data?: object) =>
   axiosInstance.put<T>(url, data, {
     headers: getHeaders(),
   })
 
-export const patch = <T>(url: string, data?: object) =>
+export const apiPatch = <T>(url: string, data?: object) =>
   axiosInstance.patch<T>(url, data, {
     headers: getHeaders(),
   })
 
-export const remove = (url: string, params?: object) =>
+export const apiDelete = (url: string, params?: object) =>
   axiosInstance.delete(url, {
     headers: getHeaders(),
     params,

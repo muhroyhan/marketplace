@@ -12,6 +12,7 @@ export const CLIENT_PATH = {
 }
 
 export const API_PATH = {
+  CATEGORIES: '/categories',
   PRODUCTS: '/products',
   SLUG: '/slug',
 }
