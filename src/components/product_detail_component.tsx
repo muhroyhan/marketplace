@@ -1,13 +1,13 @@
 'use client'
 
-import { CLIENT_PATH } from '@constants/paths'
 import { Carousel } from '@mantine/carousel'
 import {
-  Anchor,
+  Center,
   Flex,
   Image,
-  LoadingOverlay,
+  Loader,
   SimpleGrid,
+  Skeleton,
   Text,
 } from '@mantine/core'
 import React, { useEffect } from 'react'
@@ -21,6 +21,22 @@ const ProductDetailComponent = (props: { slug: string }) => {
   useEffect(() => {
     if (props.slug) setSlug(props.slug)
   }, [])
+
+  const renderSkeleton = () => (
+    <SimpleGrid cols={2} spacing='xl'>
+      <Skeleton h='50vw' w='100%' />
+      <Flex direction='column' gap='xl'>
+        <Skeleton h={20} w='100%' />
+        <Skeleton h={150} w='100%' />
+        <SimpleGrid cols={2} spacing={2}>
+          <Skeleton h={20} w='100%' />
+          <Skeleton h={20} w='100%' />
+          <Skeleton h={20} w='100%' />
+          <Skeleton h={20} w='100%' />
+        </SimpleGrid>
+      </Flex>
+    </SimpleGrid>
+  )
 
   const renderProduct = () => (
     <SimpleGrid cols={2} spacing='xl'>
@@ -47,7 +63,8 @@ const ProductDetailComponent = (props: { slug: string }) => {
 
   return (
     <Flex direction='column' gap='xl'>
-      {renderProduct()}
+      {!data.id && renderSkeleton()}
+      {data.id && renderProduct()}
     </Flex>
   )
 }

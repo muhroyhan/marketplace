@@ -10,7 +10,7 @@ export const ProductCardComponent = (product: Product, key: number) => {
       href={CLIENT_PATH.PRODUCT + `/${product.category.slug}/${product.slug}`}
       key={key}
     >
-      <Card>
+      <Card p={0}>
         <Image src={product.images[0]} />
       </Card>
     </NextLink>
