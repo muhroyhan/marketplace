@@ -3,19 +3,25 @@
 import { productSearchAtom, productSearchQuery } from '@atoms/product'
 import { CLIENT_PATH } from '@constants/paths'
 import {
+  Button,
   ComboboxLikeRenderOptionInput,
   ComboboxStringItem,
   Flex,
   Text,
 } from '@mantine/core'
-import { IconBuildingStore, IconHeart, IconUser } from '@tabler/icons-react'
+import {
+  IconBuildingStore,
+  IconHeart,
+  IconShoppingCart,
+  IconUser,
+} from '@tabler/icons-react'
 import React from 'react'
 import { AutoComplete } from './form/autocomplete'
 import { NextLink } from './next_link'
 import { useAtom, useSetAtom } from 'jotai'
 import { searchDebounce } from '@utility/search_debounce'
 
-export const Header = () => {
+export const Header = (props: { accessToken?: string }) => {
   const [{ data }] = useAtom(productSearchQuery)
   const setSearch = useSetAtom(productSearchAtom)
 
@@ -37,7 +43,7 @@ export const Header = () => {
   }
 
   return (
-    <Flex gap={10} p={10}>
+    <Flex align='center' gap={10} h='10vh'>
       <NextLink href={CLIENT_PATH.HOME}>
         <IconBuildingStore size={40} />
       </NextLink>
@@ -48,11 +54,21 @@ export const Header = () => {
         renderOption={renderSearchOption}
       />
       <NextLink href={CLIENT_PATH.WISHLIST}>
+        <IconShoppingCart size={40} />
+      </NextLink>
+      <NextLink href={CLIENT_PATH.WISHLIST}>
         <IconHeart size={40} />
       </NextLink>
-      <NextLink href={CLIENT_PATH.USER}>
-        <IconUser size={40} />
-      </NextLink>
+      {props.accessToken && (
+        <NextLink href={CLIENT_PATH.USER}>
+          <IconUser size={40} />
+        </NextLink>
+      )}
+      {!props.accessToken && (
+        <NextLink href={CLIENT_PATH.LOGIN}>
+          <Button>Login</Button>
+        </NextLink>
+      )}
     </Flex>
   )
 }

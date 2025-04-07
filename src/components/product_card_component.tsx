@@ -1,5 +1,5 @@
 import { Card, Image } from '@mantine/core'
-import { Product } from '@models/product'
+import { Product } from '@models/product.model'
 import React from 'react'
 import { NextLink } from './next_link'
 import { CLIENT_PATH } from '@constants/paths'

@@ -1,6 +1,13 @@
 import { categoriesQuery } from '@atoms/category'
 import { productPaginatedParamAtom } from '@atoms/product'
-import { Container, Flex, NumberInput, Select, Text } from '@mantine/core'
+import {
+  Container,
+  Flex,
+  NumberInput,
+  Select,
+  Space,
+  Text,
+} from '@mantine/core'
 import { useForm, zodResolver } from '@mantine/form'
 import { objectFilter } from '@utility/object_filter'
 import { useAtom } from 'jotai'
@@ -80,7 +87,7 @@ export const ProductFilterComponent = (props: { isCategoryHide?: boolean }) => {
           placeholder='Select Category'
         />
       )}
-      <Container p={0}>
+      <Container p={0} w='100%'>
         <Text size='sm' fw='500'>
           Price Range
         </Text>
@@ -88,11 +95,15 @@ export const ProductFilterComponent = (props: { isCategoryHide?: boolean }) => {
           <NumberInput
             {...form.getInputProps('priceMin')}
             key={form.key('priceMin')}
+            w='100%'
           />
+          <Space w='md' />
           <Text>-</Text>
+          <Space w='md' />
           <NumberInput
             {...form.getInputProps('priceMax')}
             key={form.key('priceMax')}
+            w='100%'
           />
         </Flex>
       </Container>

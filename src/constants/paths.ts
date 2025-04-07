@@ -13,6 +13,8 @@ export const CLIENT_PATH = {
 
 export const API_PATH = {
   CATEGORIES: '/categories',
+  IS_AVAILABLE: '/is-available',
   PRODUCTS: '/products',
   SLUG: '/slug',
+  USERS: '/users',
 }

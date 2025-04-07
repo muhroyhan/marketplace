@@ -1,7 +1,7 @@
 import { ProductParams } from '@constants/interface/params'
 import { apiGet } from './api'
 import { API_PATH } from '@constants/paths'
-import { Product } from '@models/product'
+import { Product } from '@models/product.model'
 import { atom } from 'jotai'
 import { atomWithQuery } from 'jotai-tanstack-query'
 

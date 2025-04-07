@@ -1,4 +1,4 @@
-import { Category } from '@models/category'
+import { Category } from '@models/category.model'
 import { atom } from 'jotai'
 import { atomWithQuery } from 'jotai-tanstack-query'
 import { apiGet } from './api'
