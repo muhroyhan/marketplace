@@ -1,6 +1,9 @@
 'use client'
 
+import { authLoginMutation } from '@atoms/auth'
 import { emailAvailabilityMutation } from '@atoms/user'
+import { LoginBody } from '@constants/interface/bodies'
+import { LoginResponse } from '@constants/interface/responses'
 import { CLIENT_PATH } from '@constants/paths'
 import {
   Alert,
@@ -20,20 +23,19 @@ import { useRouter } from 'next/navigation'
 import React, { useEffect } from 'react'
 import { z } from 'zod'
 
-interface LoginInf {
-  email: string
-  password: string
-}
-
 const schema = z.object({
   email: z.string().email('Email format invalid'),
   password: z.string().min(8, 'Password min 8 characters'),
 })
 
-export const LoginFormComponent = (props: { accessToken?: string }) => {
+export const LoginFormComponent = (props: {
+  accessToken?: string
+  setTokens: (values: LoginResponse) => Promise<void>
+}) => {
   const router = useRouter()
-  const [{ mutateAsync: checkEmail }] = useAtom(emailAvailabilityMutation)
-  const form = useForm<LoginInf>({
+  const [{ data, mutateAsync: login, isPending, isSuccess }] =
+    useAtom(authLoginMutation)
+  const form = useForm<LoginBody>({
     initialValues: {
       email: '',
       password: '',
@@ -45,16 +47,23 @@ export const LoginFormComponent = (props: { accessToken?: string }) => {
     if (props.accessToken) router.replace(CLIENT_PATH.HOME)
   }, [props.accessToken])
 
-  const handleSubmit = async (values: LoginInf) => {
-    const { isAvailable } = await checkEmail(values.email)
-
-    if (!isAvailable) {
-      return notifications.show({
-        color: 'red',
-        message: 'User not yet registered',
-      })
+  useEffect(() => {
+    if (!isPending && isSuccess) {
+      handleRedirect(data)
     }
-    console.log(values)
+  }, [isPending, isSuccess])
+
+  const handleRedirect = async (res: LoginResponse) => {
+    await props.setTokens(res)
+    notifications.show({
+      color: 'green',
+      message: 'Email already registered',
+    })
+    router.replace(CLIENT_PATH.HOME)
+  }
+
+  const handleSubmit = async (values: LoginBody) => {
+    login(values)
   }
 
   return (

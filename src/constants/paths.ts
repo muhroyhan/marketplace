@@ -9,11 +9,14 @@ export const CLIENT_PATH = {
   RESET_PASSWORD: '/reset-password',
   TERMS_OF_SERVICE: '/terms',
   PRIVACY_POLICY: '/privacy',
+  WELCOME: '/welcome',
 }
 
 export const API_PATH = {
+  AUTH: '/auth',
   CATEGORIES: '/categories',
   IS_AVAILABLE: '/is-available',
+  LOGIN: '/login',
   PRODUCTS: '/products',
   SLUG: '/slug',
   USERS: '/users',

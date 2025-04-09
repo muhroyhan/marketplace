@@ -1,4 +1,4 @@
-import { Card, Image } from '@mantine/core'
+import { Card, Center, Image } from '@mantine/core'
 import { Product } from '@models/product.model'
 import React from 'react'
 import { NextLink } from './next_link'
@@ -10,9 +10,9 @@ export const ProductCardComponent = (product: Product, key: number) => {
       href={CLIENT_PATH.PRODUCT + `/${product.category.slug}/${product.slug}`}
       key={key}
     >
-      <Card p={0}>
-        <Image src={product.images[0]} />
-      </Card>
+      <Center p={0} w={{ base: '100%' }} h={250}>
+        <Image h={200} src={product.images[0]} fit='contain' />
+      </Center>
     </NextLink>
   )
 }

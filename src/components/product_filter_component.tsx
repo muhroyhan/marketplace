@@ -49,7 +49,6 @@ export const ProductFilterComponent = (props: { isCategoryHide?: boolean }) => {
 
   useEffect(() => {
     const { categorySlug, ...restParams } = params
-    console.log(searchParams.has('categoryId'))
     let newParams = restParams
     if (searchParams.has('categoryId')) {
       newParams = {
@@ -64,7 +63,6 @@ export const ProductFilterComponent = (props: { isCategoryHide?: boolean }) => {
         priceMax: Number(searchParams.get('priceMax')),
       }
     }
-    console.log(newParams)
     setParams(newParams)
   }, [
     searchParams.get('categoryId'),
