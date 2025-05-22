@@ -18,6 +18,7 @@ export const API_PATH = {
   IS_AVAILABLE: '/is-available',
   LOGIN: '/login',
   PRODUCTS: '/products',
+  PROFILE: '/profile',
   SLUG: '/slug',
   USERS: '/users',
 }

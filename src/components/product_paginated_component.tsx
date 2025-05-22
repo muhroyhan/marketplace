@@ -71,11 +71,13 @@ export const ProductPaginatedComponent = (props: { slugs?: string[] }) => {
         {renderPagination()}
         <SimpleGrid cols={3}>
           {!isFetching &&
-            data.map((item, key) => ProductCardComponent(item, key))}
+            data.map((item, key) => (
+              <ProductCardComponent key={key} product={item} />
+            ))}
           {isFetching &&
-            Array(9)
-              .keys()
-              .map(() => <Skeleton w='100%' h={250} />)}
+            Array.from(Array(9).keys()).map((key) => (
+              <Skeleton key={key} w='100%' h={250} />
+            ))}
         </SimpleGrid>
         {renderPagination()}
       </Container>

@@ -1,19 +1,24 @@
-import axios from 'axios'
+import axios, { AxiosHeaders } from 'axios'
 
 const axiosInstance = axios.create({
   baseURL: process.env.API_BASE_URL,
 })
 
-const getHeaders = () => {
+const getHeaders = (headers?: AxiosHeaders) => {
   return {
     Accept: 'application/json',
     Type: 'application/json',
+    ...headers,
   }
 }
 
-export const apiGet = <T>(url: string, params?: object) =>
+export const apiGet = <T>(
+  url: string,
+  params?: object,
+  headers?: AxiosHeaders,
+) =>
   axiosInstance.get<T>(url, {
-    headers: getHeaders(),
+    headers: getHeaders(headers),
     params,
   })
 

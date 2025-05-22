@@ -1,18 +1,23 @@
-import { Card, Center, Image } from '@mantine/core'
+import { Card, Center, Container, Image, Text } from '@mantine/core'
 import { Product } from '@models/product.model'
 import React from 'react'
 import { NextLink } from './next_link'
 import { CLIENT_PATH } from '@constants/paths'
 
-export const ProductCardComponent = (product: Product, key: number) => {
+export const ProductCardComponent = (props: { product: Product }) => {
   return (
-    <NextLink
-      href={CLIENT_PATH.PRODUCT + `/${product.category.slug}/${product.slug}`}
-      key={key}
-    >
-      <Center p={0} w={{ base: '100%' }} h={250}>
-        <Image h={200} src={product.images[0]} fit='contain' />
-      </Center>
-    </NextLink>
+    <Card p={0} w={250} h={250}>
+      <NextLink
+        href={
+          CLIENT_PATH.PRODUCT +
+          `/${props.product.category.slug}/${props.product.slug}`
+        }
+      >
+        <Center h={200} p={0}>
+          <Image h={200} src={props.product.images[0]} fit='cover' />
+        </Center>
+        <Text>{props.product.title}</Text>
+      </NextLink>
+    </Card>
   )
 }

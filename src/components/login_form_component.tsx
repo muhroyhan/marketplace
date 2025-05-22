@@ -1,12 +1,10 @@
 'use client'
 
 import { authLoginMutation } from '@atoms/auth'
-import { emailAvailabilityMutation } from '@atoms/user'
 import { LoginBody } from '@constants/interface/bodies'
 import { LoginResponse } from '@constants/interface/responses'
 import { CLIENT_PATH } from '@constants/paths'
 import {
-  Alert,
   Button,
   Card,
   Center,
@@ -57,7 +55,7 @@ export const LoginFormComponent = (props: {
     await props.setTokens(res)
     notifications.show({
       color: 'green',
-      message: 'Email already registered',
+      message: 'Welcome Back!',
     })
     router.replace(CLIENT_PATH.HOME)
   }
@@ -84,7 +82,7 @@ export const LoginFormComponent = (props: {
             placeholder='Password'
           />
           <Space h='lg' />
-          <Button type='submit' w='100%'>
+          <Button loading={isPending} type='submit' w='100%'>
             Login
           </Button>
           <Space h='lg' />
